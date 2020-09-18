@@ -86,24 +86,23 @@ async function buildTeam() {
     // start with the manager
    
     if (!mgrDone){
-
       const answers = await promptUser("Manager");
-    const manager =  new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
-    console.log(manager);
-    // myTeam.push(manager);
-    loadEmployee(manager);
-    mgrDone = true;
+      const manager =  new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+      console.log(manager);
+      // myTeam.push(manager);
+      loadEmployee(manager);
+      mgrDone = true;
     } 
 
     const teamMember = await addTeamMember();
 
     if (teamMember.role == "Engineer"){
       const answersE = await promptUser("Engineer");
-        const engineer = new Engineer(answersE.name, answersE.id, answersE.email, answersE.github);
-        console.log(engineer);
-        // myTeam.push(engineer);
-        loadEmployee(engineer);
-        buildTeam();
+      const engineer = new Engineer(answersE.name, answersE.id, answersE.email, answersE.github);
+      console.log(engineer);
+      // myTeam.push(engineer);
+      loadEmployee(engineer);
+      buildTeam();
     } 
     
     if (teamMember.role == "Intern"){
@@ -116,8 +115,8 @@ async function buildTeam() {
     }  
     
     if (teamMember.role == "Done") {
-        console.log("done adding employees");
-        fs.writeFileSync(outputPath, render(myTeam), "utf-8");
+      console.log("done adding employees");
+      fs.writeFileSync(outputPath, render(myTeam), "utf-8");
     }
 
   } catch(err) {
